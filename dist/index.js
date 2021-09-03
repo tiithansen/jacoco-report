@@ -12417,7 +12417,7 @@ async function action() {
     const reports = reportsJson.map((report) => report["report"]);
 
     const overallCoverage = process.getOverallCoverage(reports);
-    if (debugMode) core.info(`overallCoverage: ${overallCoverage}`);
+    if (debugMode) core.info(`overallCoverage: ${debug(overallCoverage)}`);
     core.setOutput(
       "coverage-overall",
       parseFloat(overallCoverage.project.toFixed(2))
@@ -12470,7 +12470,10 @@ async function getChangedFiles(base, head, client) {
   });
 
   var changedFiles = [];
+  core.info(`Changed Files - Response: ${debug(response)}`);
+  core.info(`Changed Files - Data: ${debug(response.data)}`);
   response.data.files.forEach((file) => {
+    core.info(`Changed Files - file: ${debug(file)}`);
     var changedFile = {
       filePath: file.filename,
       url: file.blob_url,
