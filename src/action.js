@@ -90,6 +90,7 @@ function debug(obj) {
   return JSON.stringify(obj, " ", 4);
 }
 
+
 async function getJsonReports(xmlPaths) {
   return Promise.all(
     xmlPaths.map(async (xmlPath) => {
