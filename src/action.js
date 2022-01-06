@@ -42,6 +42,7 @@ async function action() {
 
     core.info(`base sha: ${base}`);
     core.info(`head sha: ${head}`);
+    if (debugMode) core.info(`github.payload: ${debug(github.context.payload)}`);
 
     const client = github.getOctokit(core.getInput("token"));
 
@@ -89,7 +90,6 @@ async function action() {
 function debug(obj) {
   return JSON.stringify(obj, " ", 4);
 }
-
 
 async function getJsonReports(xmlPaths) {
   return Promise.all(
