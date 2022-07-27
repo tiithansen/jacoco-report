@@ -69,21 +69,21 @@ async function action() {
       parseFloat(filesCoverage.percentage.toFixed(2))
     );
 
-    if (prNumber != null) {
-      await addComment(
-        prNumber,
-        updateComment,
-        render.getTitle(title),
-        render.getPRComment(
-          overallCoverage.project,
-          filesCoverage,
-          minCoverageOverall,
-          minCoverageChangedFiles,
-          title
-        ),
-        client
-      );
+    const summary = render.getPRComment(
+      overallCoverage.project,
+      filesCoverage,
+      minCoverageOverall,
+      minCoverageChangedFiles,
+      title
+    );
+
+    if (fs.existsSync(process.env.GITHUB_STEP_SUMMARY)) {
+      core.info(`Appending summary to file ${process.env.GITHUB_STEP_SUMMARY}`);
+      fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+    } else {
+      core.info(`summary file ${process.env.GITHUB_STEP_SUMMARY} does not exist!`);
     }
+
   } catch (error) {
     core.setFailed(error);
   }

@@ -1,5 +1,5 @@
 name: "JaCoCo Report"
-description: "Publishes the JaCoCo report as a comment in the Pull Request"
+description: "Publishes the JaCoCo report as a comment in the Job Summary"
 inputs:
   paths:
     description: "Comma separated paths of the generated jacoco xml files"
@@ -35,7 +35,7 @@ outputs:
 
 runs:
   using: "node16"
-  main: "dist/index.js"
+  main: "dist/main.js"
 
 branding:
   icon: "percent"

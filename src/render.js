@@ -62,7 +62,7 @@ function getTitle(title) {
 }
 
 function getStatus(coverage, minCoverage) {
-  var status = `:green_apple:`;
+  var status = `:heavy_check_mark:`;
   if (coverage < minCoverage) {
     status = `:x:`;
   }
