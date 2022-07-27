@@ -3,7 +3,7 @@ const github = require("@actions/github");
 const fs = require("fs");
 const parser = require("xml2js");
 const { parseBooleans } = require("xml2js/lib/processors");
-const process = require("./process");
+const util = require("./process");
 const render = require("./render");
 
 async function action() {
@@ -55,14 +55,14 @@ async function action() {
     if (debugMode) core.info(`report value: ${debug(reportsJson)}`);
     const reports = reportsJson.map((report) => report["report"]);
 
-    const overallCoverage = process.getOverallCoverage(reports);
+    const overallCoverage = util.getOverallCoverage(reports);
     if (debugMode) core.info(`overallCoverage: ${overallCoverage}`);
     core.setOutput(
       "coverage-overall",
       parseFloat(overallCoverage.project.toFixed(2))
     );
 
-    const filesCoverage = process.getFileCoverage(reports, changedFiles);
+    const filesCoverage = util.getFileCoverage(reports, changedFiles);
     if (debugMode) core.info(`filesCoverage: ${debug(filesCoverage)}`);
     core.setOutput(
       "coverage-changed-files",
