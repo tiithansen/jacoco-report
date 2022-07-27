@@ -77,6 +77,8 @@ async function action() {
       title
     );
 
+    core.info(`Summary file ${process.env.GITHUB_STEP_SUMMARY}`);
+
     if (fs.existsSync(process.env.GITHUB_STEP_SUMMARY)) {
       core.info(`Appending summary to file ${process.env.GITHUB_STEP_SUMMARY}`);
       fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
